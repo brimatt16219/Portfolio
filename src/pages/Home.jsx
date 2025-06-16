@@ -1,4 +1,5 @@
 import { Navbar } from "../components/Navbar"
+import StarsCanvas from "../components/StarsCanvas"
 import { ThemeToggle } from "../components/ThemeToggle"
 
 export const Home = () => {
@@ -7,7 +8,7 @@ export const Home = () => {
             {/* Theme toggle */}
             <ThemeToggle />
             {/* Backgound effects */}
-
+            <StarsCanvas />
             {/* Navbar */}
             <Navbar />
             {/* Main content */}
