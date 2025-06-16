@@ -1,12 +1,35 @@
-# React + Vite
+# My Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my personal developer portfolio!
+Enjoy the star shower :)
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [https://portfolio-iota-teal-82.vercel.app/](https://portfolio-iota-teal-82.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React** — Component-based UI framework
+- **Vite** — Super fast dev server and build tool
+- **Tailwind CSS** — Utility-first CSS for rapid styling
+- **Three.js** + `@react-three/fiber` — WebGL-powered 3D graphics
+- **@react-three/drei** — Helpers for simplified Three.js setup
+
+
+This project is deployed via [Vercel](https://vercel.com/). 
+
+---
+
+## Connect With Me
+
+- [LinkedIn](https://www.linkedin.com/in/ch4ng)
+- [GitHub](https://github.com/brimatt16219)
+- [Portfolio](https://portfolio-iota-teal-82.vercel.app/)
+- Email: brimatt062495@gmail.com
+
+---
+
+## Credits
+
+Made by **Brian Chang**  
+© 2025 — All rights reserved.
