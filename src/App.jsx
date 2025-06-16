@@ -4,6 +4,7 @@ import { NotFound } from './pages/NotFound'
 import { Home } from './pages/Home'
 
 const App = () => {
+  document.documentElement.classList.add("dark");
   return (
     <>
       <BrowserRouter>

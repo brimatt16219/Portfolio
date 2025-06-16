@@ -4,10 +4,11 @@ export const About = () => {
     return (
         <section id="about" className="py-24 px-4 relative">
             {" "}
-            <div className="container mx-auto max-w-5xl bg-card/50 rounded-lg py-8"> 
-                <h2 className="text-3xl md:text-4xl text-glow mb-12 text-center">
-                    About me
-                </h2>
+            <h2 className="text-3xl md:text-4xl text-glow mb-12 text-center">
+                About me
+            </h2>
+            <div className="container mx-auto max-w-5xl bg-card/60 rounded-lg py-8"> 
+                
                 
                 <div className="mb-12 flex justify-center items-center text-center align-middle">
                     <p className="lg:w-1/2">
@@ -39,7 +40,10 @@ export const About = () => {
                     <a href="#contact" className="cosmic-button">
                         Contact
                     </a>
-                    <a className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300">
+                    <a 
+                    href="/resume.pdf"
+                    download="resume.pdf"
+                    className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300">
                         Download Resume
                     </a>
                 </div>

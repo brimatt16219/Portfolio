@@ -140,7 +140,7 @@ function ShootingStars({ count = 20 }) {
         <Trail
           key={star.id}
           width={star.trailWidth}
-          length={25}
+          length={35}
           decay={Math.random()}
           stride={0.0}
           color={star.color}
@@ -168,7 +168,7 @@ export default function StarsCanvas() {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
       <Canvas camera={{ 
-            position: [0, 0, 15], 
+            position: [0, 0, 25], 
             // rotation: [0, -Math.PI / 2, 0], 
             fov: 60, 
             near: 0.1, 
@@ -176,7 +176,7 @@ export default function StarsCanvas() {
         }}>
         <color attach="background" args={['black']} />
         <ambientLight intensity={0.5} />
-        <ShootingStars count={20} />
+        <ShootingStars count={13} />
         <Stars saturation={0} count={400} speed={0.5} />
         {/* <OrbitControls enableZoom={false} /> */}
         <EffectComposer>
