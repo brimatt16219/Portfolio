@@ -8,7 +8,7 @@ const jobs = [
     description: "Maintained and enhanced large-scale Angular web applications with added mobile responsiveness, while designing RESTful APIs using .NET and Entity Framework to facilitate data flow across services. Integrated Adobe PDF Extract API with Python to automate document parsing, and implemented secure file uploads to AWS S3 using credentials stored in Oracle and SQL databases.", 
     dates: "May 2024 - Present",
     image: "/projects/project1.png",
-    tags: ["Angular",".NET Core","TypeScript","C#","Figma", "Python","HTML","CSS","SQL","AWS","Visual Studio"],
+    tags: ["Angular",".NET Core", "Node.js","TypeScript","C#","Figma", "Python","HTML","CSS","SQL","AWS","Visual Studio"],
     location: "Orlando, FL",
   },
   {
@@ -18,7 +18,7 @@ const jobs = [
     description: "Developed new designs and implemented pages and components in Angular web applications, while maintaining and creating Oracle database tables to support multiple user types. Tracked user data for issuers, investors, and primary accounts on a municipal data server.", 
     dates: "Jan 2024 - May 2024",
     image: "/projects/project1.png",
-    tags: ["Angular",".NET Core","TypeScript","C#","HTML","CSS","Figma","Visual Studio"],
+    tags: ["Angular",".NET Core", "Node.js","TypeScript","C#","HTML","CSS","Figma","Visual Studio"],
     location: "Orlando, FL",
   },
   {
@@ -61,17 +61,19 @@ export const Experience = () => {
             >
 
               <div className="p-6">
+                
                 <h2 className="text-xl font-semibold mb-1">{job.company}</h2>
                 <h3 className="text-xl font-semibold mb-1"> {job.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4">
-                    {job.description}
-                </p>
                 <p className="text-muted-foreground text-sm">
                   {job.dates}
                 </p>
                 <p className="text-muted-foreground text-sm mb-4">
                     {job.location}
                 </p>
+                <p className="text-muted-foreground text-sm mb-4">
+                    {job.description}
+                </p>
+                
                 
                 <div className="flex flex-wrap gap-2 mb-4 justify-center">
                   {job.tags.map((tag) => (

@@ -6,7 +6,7 @@ const projects = [
     title: "Voyager",
     description: "A platform to help users plan trips with maximum store coverage and minimal travel distance.",
     image: "/projects/project1.png",
-    tags: ["React", "TailwindCSS", "Googlemaps API", "Express"],
+    tags: ["React", "Vite", "Axios", "TailwindCSS", "Googlemaps API", "Node.js", "Express.js"],
     demoUrl: "#",
     githubUrl: "https://github.com/brimatt16219/Voyager",
   },
