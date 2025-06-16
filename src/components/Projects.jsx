@@ -22,7 +22,7 @@ const projects = [
   {
     id: 2,
     title: "Porfolio",
-    description: "My personal portfolio with all the information on background, experience, projects, and socials",
+    description: "My personal portfolio with all the information on background, experience, projects, and socials.",
     image: "/projects/project1.png",
     tags: ["React", "Vite", "Three.js", "TailwindCSS"],
     demoUrl: "#",
