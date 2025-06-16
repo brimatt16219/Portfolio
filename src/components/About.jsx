@@ -4,13 +4,13 @@ export const About = () => {
     return (
         <section id="about" className="py-24 px-4 relative">
             {" "}
-            <div className="container mx-auto max-w-5xl"> 
-                <h2 className="text-3xl text-glow mb-12 text-center">
+            <div className="container mx-auto max-w-5xl bg-card/50 rounded-lg py-8"> 
+                <h2 className="text-3xl md:text-4xl text-glow mb-12 text-center">
                     About me
                 </h2>
                 
                 <div className="mb-12 flex justify-center items-center text-center align-middle">
-                    <p className="w-1/2">
+                    <p className="lg:w-1/2">
                         My name is Brian Chang and I am 22 years old currently residing in Orlando, Florida. I love to code and work on big projects, this portfolio is one of them so I hope you enjoy!
                     </p>
                 </div>

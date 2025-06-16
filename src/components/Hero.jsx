@@ -6,7 +6,7 @@ export const Hero = () => {
         >
             <div className="container max-w-4xl mx-auto text-center z-10">
                 <div className="space-y-6">
-                    <h3 className="text-sm md:text-6xl ">
+                    <h3 className="text-3xl md:text-6xl ">
                         <span className="text-glow opacity-0 animate-fade-in-delay-2">welcome</span>
                     </h3>
 

@@ -59,7 +59,7 @@ function ShootingStars({ count = 20 }) {
     const finalX     =  width / 2 + margin
     const initialY   = (Math.random() - 0.5) * height
     const arcHeight  = Math.random() * (height * 0.3) + (height * 0.1)
-    const speed      = Math.random() * 2 + 1        // 1–3 units/sec
+    const speed      = Math.random() * 6 + 1        // 1–3 units/sec
     const z          = (Math.random() - 0.5) * 20
     const pos        = new THREE.Vector3(initialX, initialY, z)
     const hex        = palette[Math.floor(Math.random() * palette.length)]
@@ -168,7 +168,7 @@ export default function StarsCanvas() {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
       <Canvas camera={{ 
-            position: [0, 0, 13], 
+            position: [0, 0, 15], 
             // rotation: [0, -Math.PI / 2, 0], 
             fov: 60, 
             near: 0.1, 
@@ -176,7 +176,7 @@ export default function StarsCanvas() {
         }}>
         <color attach="background" args={['black']} />
         <ambientLight intensity={0.5} />
-        <ShootingStars count={30} />
+        <ShootingStars count={20} />
         <Stars saturation={0} count={400} speed={0.5} />
         {/* <OrbitControls enableZoom={false} /> */}
         <EffectComposer>
