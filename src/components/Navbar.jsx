@@ -7,6 +7,7 @@ const navItems = [
     {name: "About", href: "#about"},
     {name: "Experience", href: "#experience"},
     {name: "Projects", href: "#projects"},
+    {name: "Skills", href: "#skills"},
     {name: "Contact", href: "#contact"},
 ]
 
@@ -61,7 +62,7 @@ export const Navbar = () => {
                 </button>
 
                 <div className={cn(
-                    "fixed inset-0 bg-background-95 backdrop-blue-md z-40 flex flex-column items-center justify-center",
+                    "fixed inset-0 bg-background/85 backdrop-blue-md z-40 flex flex-column items-center justify-center",
                     "transition-all duration-300 md:hidden",
                     isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                     )}

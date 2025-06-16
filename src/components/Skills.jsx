@@ -49,6 +49,10 @@ export const Skills = () => {
                     Skills
                 </h2>
 
+                <p className="mb-12">
+                    These are some of the skills I’ve developed through both professional software engineering experience and academic coursework as a computer science student.
+                </p>
+
                 <div className="flex flex-wrap justify-center gap-4 mb-12">
                     {categories.map((category, key) => (
                         <button 

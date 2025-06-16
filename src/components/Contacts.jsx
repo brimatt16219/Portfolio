@@ -30,6 +30,10 @@ export const Contacts = () => {
     <h2 className="text-3xl md:text-4xl text-glow  mb-12 text-center">
         Contact Me
     </h2>
+    
+    <p className="mb-12">
+        Feel free to connect with me through any of the platforms below.
+    </p>
       <div className="container mx-auto max-w-5xl bg-card/60 rounded-lg py-8">
         
 
