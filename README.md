@@ -24,7 +24,6 @@ This project is deployed via [Vercel](https://vercel.com/).
 
 - [LinkedIn](https://www.linkedin.com/in/ch4ng)
 - [GitHub](https://github.com/brimatt16219)
-- [Portfolio](https://portfolio-iota-teal-82.vercel.app/)
 - brimatt062495@gmail.com
 
 ---
