@@ -40,12 +40,14 @@ export const About = () => {
                     <a href="#contact" className="cosmic-button">
                         Contact
                     </a>
-                    <a 
-                    href="/resume.pdf"
-                    download="resume.pdf"
-                    className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300">
-                        Download Resume
-                    </a>
+                    <a
+                        href="https://docs.google.com/document/d/1_bAUCFKr0Rrrnf66pCqUE5QVti7TADh0r9Rm9DO2sE8/export?format=pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+                    >
+                    Download Resume
+</a>
                 </div>
             </div>
         </section>
