@@ -21,7 +21,7 @@ export const About = () => {
                         <h3 className="text-2xl font-semibold">Software Engineer</h3>
 
                         <p className="text-muted-foreground">
-                            I currently work as a Software Engineer at DAC Bond. I have over 2 years of experience in full-stack development, dealing with popular modern front-end frameworks such as React and Angular as well as backend frameworks like Express and .NET Core.
+                            I currently work as a Software Engineer at DAC Bond, with over two years of experience in software engineering. I've worked with modern front-end frameworks such as React and Angular, as well as backend frameworks like Express and .NET Core. I also have experience with embedded systems and machine code.
                         </p>
                     </div>
                     <div className="space-y-6">
