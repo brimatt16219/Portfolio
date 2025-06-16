@@ -15,11 +15,42 @@ function ShootingStars({ count = 20 }) {
   // Unique ID generator
   const idCounter = useRef(0)
 
-  // Neon color palette
   const palette = useMemo(() => [
-    '#39FF14', '#FE4164', '#05F2F2',
-    '#F9FF00', '#FF1493', '#7D1FFF', '#FFBF00'
-  ], [])
+    // Light Blues
+    '#E0F7FA', // Cyan 50
+    '#B3E5FC', // Light Blue 100
+    '#81D4FA', // Light Blue 200
+    '#4FC3F7', // Light Blue 300
+    '#29B6F6', // Light Blue 400
+
+    // Light Oranges
+    '#FFF3E0', // Orange 50
+    '#FFE0B2', // Orange 100
+    '#FFCC80', // Orange 200
+    '#FFB74D', // Orange 300
+    '#FFA726', // Orange 400
+
+    // Light Yellows
+    '#FFFDE7', // Yellow 50
+    '#FFF9C4', // Yellow 100
+    '#FFF59D', // Yellow 200
+    '#FFF176', // Yellow 300
+    '#FFEE58', // Yellow 400
+
+    // Light Magentas
+    '#FCE4EC', // Pink 50
+    '#F8BBD0', // Pink 100
+    '#F48FB1', // Pink 200
+    '#F06292', // Pink 300
+    '#EC407A', // Pink 400
+
+    // Light Reds
+    '#FFEBEE', // Red 50
+    '#FFCDD2', // Red 100
+    '#EF9A9A', // Red 200
+    '#E57373', // Red 300
+    '#EF5350', // Red 400
+    ], [])
 
   // Factory for a fresh star
   function createStar() {
@@ -109,7 +140,7 @@ function ShootingStars({ count = 20 }) {
         <Trail
           key={star.id}
           width={star.trailWidth}
-          length={20}
+          length={25}
           decay={Math.random()}
           stride={0.0}
           color={star.color}
@@ -135,21 +166,21 @@ function ShootingStars({ count = 20 }) {
 
 export default function StarsCanvas() {
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none">
+    <div className="fixed inset-0 z-0 pointer-events-none">
       <Canvas camera={{ 
-            position: [0, 0, 10], 
-            rotation: [0, -Math.PI / 2, 0], 
+            position: [0, 0, 13], 
+            // rotation: [0, -Math.PI / 2, 0], 
             fov: 60, 
             near: 0.1, 
             far: 1000 
         }}>
         <color attach="background" args={['black']} />
         <ambientLight intensity={0.5} />
-        <ShootingStars count={20} />
+        <ShootingStars count={30} />
         <Stars saturation={0} count={400} speed={0.5} />
-        <OrbitControls enableZoom={false} />
+        {/* <OrbitControls enableZoom={false} /> */}
         <EffectComposer>
-          <Bloom mipmapBlur luminanceThreshold={0.5} intensity={1.2} />
+          <Bloom mipmapBlur luminanceThreshold={0.2} intensity={1.0} />
         </EffectComposer>
       </Canvas>
     </div>
