@@ -12,7 +12,7 @@ export const About = () => {
                 
                 <div className="mb-12 flex justify-center items-center text-center align-middle">
                     <p className="lg:w-1/2">
-                        My name is Brian Chang and I am 22 years old currently residing in Orlando, Florida. I love to code and work on big projects. This portfolio is one of them, so I hope you enjoy!"
+                        My name is Brian Chang and I am 22 years old currently residing in Orlando, Florida. I love to code and work on big projects. This portfolio is one of them, so I hope you enjoy!
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
