@@ -10,6 +10,24 @@ const projects = [
     demoUrl: "#",
     githubUrl: "https://github.com/brimatt16219/Voyager",
   },
+  {
+    id: 2,
+    title: "Hemo Web App",
+    description: "An admin portal built in Angular to display data and information relating to the VR experience, Dr. Hemo's Great Escape.",
+    image: "/projects/project1.png",
+    tags: ["Angular", ".NET Core", "Node.js", "Azure", "SQL"],
+    demoUrl: "#",
+    githubUrl: "https://github.com/brimatt16219/Hemo_Web_App",
+  },
+  {
+    id: 2,
+    title: "Porfolio",
+    description: "My personal portfolio with all the information on background, experience, projects, and socials",
+    image: "/projects/project1.png",
+    tags: ["React", "Vite", "Three.js", "TailwindCSS"],
+    demoUrl: "#",
+    githubUrl: "https://github.com/brimatt16219/Portfolio",
+  },
   
 ];
 
