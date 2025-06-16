@@ -18,14 +18,14 @@ export const About = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
                     
                     <div className="space-y-6">
-                        <h3 className="text-2xl font-semibold">Software Engineer</h3>
+                        <h3 className="text-2xl font-semibold">Professional Work</h3>
 
                         <p className="text-muted-foreground">
                             I currently work as a Software Engineer at DAC Bond, with over two years of experience in software engineering. I've worked with modern front-end frameworks such as React and Angular, as well as backend frameworks like Express and .NET Core. I also have experience with embedded systems and machine code.
                         </p>
                     </div>
                     <div className="space-y-6">
-                        <h3 className="text-2xl font-semibold">Senior Student</h3>
+                        <h3 className="text-2xl font-semibold">Education</h3>
 
                         <p className="text-muted-foreground">
                             I am also a Senior student currently attending the University of Central Florida pursuing a Bachelor's Degree in Computer Science.

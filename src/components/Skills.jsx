@@ -27,7 +27,7 @@ const skills = [
     {name: "Git", category: "tools"},
     {name: "Visual Studio", category: "tools"},
     {name: "Figma", category: "tools"},
-    {name: "TortioseSVN", category: "tools"},
+    {name: "TortoiseSVN", category: "tools"},
     {name: "Docker", category: "tools"},
 ]
 
