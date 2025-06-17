@@ -7,7 +7,7 @@ const projects = [
     description: "A platform to help users plan trips with maximum store coverage and minimal travel distance.",
     image: "/projects/project1.png",
     tags: ["React", "Vite", "Axios", "TailwindCSS", "Googlemaps API", "Node.js", "Express.js"],
-    demoUrl: "#",
+    demoUrl: "",
     githubUrl: "https://github.com/brimatt16219/Voyager",
   },
   {
@@ -16,7 +16,7 @@ const projects = [
     description: "An admin portal built in Angular to display data and information relating to the VR experience, Dr. Hemo's Great Escape.",
     image: "/projects/project1.png",
     tags: ["Angular", ".NET Core", "Node.js", "Azure", "SQL"],
-    demoUrl: "#",
+    demoUrl: "",
     githubUrl: "https://github.com/brimatt16219/Hemo_Web_App",
   },
   {
@@ -70,13 +70,15 @@ export const Projects = () => {
                 </div>
                 <div className="flex justify-between items-center justify-center">
                   <div className="flex space-x-3">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
+                    {project.demoUrl?.trim() !== "" && 
+                      (<a
+                        href={project.demoUrl}
+                        target="_blank"
+                        className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      >
+                        <ExternalLink size={20} />
+                      </a>
+                    )}
                     <a
                       href={project.githubUrl}
                       target="_blank"

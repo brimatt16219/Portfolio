@@ -28,7 +28,7 @@ export const Home = () => {
                 <About />
                 <Experience />
                 <Projects />
-                <Skills />
+                {/* <Skills /> */}
                 <Contacts />
             </main>
 
