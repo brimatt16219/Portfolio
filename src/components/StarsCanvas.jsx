@@ -167,8 +167,8 @@ export default function StarsCanvas() {
         <ScrollCameraController progressRef={scrollProgress} />
         <color attach="background" args={['black']} />
         <ambientLight intensity={0.5} />
-        <ShootingStars count={13} />
-        <Stars saturation={0} count={400} speed={0.5} />
+        <ShootingStars count={7} />
+        <Stars saturation={0} count={200} speed={0.5} />
         {/* <OrbitControls enableZoom={false} /> */}
         <EffectComposer>
           <Bloom mipmapBlur luminanceThreshold={0.05} intensity={1.0} />
