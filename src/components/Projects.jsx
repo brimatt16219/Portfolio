@@ -31,7 +31,7 @@ const projects = [
   {
     id: 4,
     title: "Laragigs",
-    description: "Job listing application built using Laravel",
+    description: "Job listing application built using Laravel.",
     image: "/projects/project1.png",
     tags: ["Laravel", "PHP", "Blade", "HTML", "CSS", "SQL"],
     demoUrl: "",
