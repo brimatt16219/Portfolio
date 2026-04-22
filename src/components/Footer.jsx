@@ -2,12 +2,12 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="py-8 bg-card/50 border-t border-border mt-12">
+    <footer className="relative z-10 py-8 bg-card/60 border-t border-border">
       <div className="container mx-auto max-w-5xl flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Brian Chang. Built with React & Three.js.
+          © {new Date().getFullYear()} Brian Chang — Built with React & Three.js
         </p>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-5">
           <a
             href="https://github.com/brimatt16219"
             target="_blank"

@@ -11,28 +11,39 @@ const navItems = [
 ];
 
 export const Navbar = () => {
-  const [isScrolled, setIsScrolled]   = useState(false);
-  const [isMenuOpen, setIsMenuOpen]   = useState(false);
-  const [activeSection, setActive]    = useState("hero");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActive]  = useState("hero");
 
+  // Scroll shadow
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-      // Determine which section is currently in view
-      const sections = navItems.map((item) => item.href.replace("#", ""));
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          setActive(sections[i]);
-          break;
+  // IntersectionObserver — fires when a section crosses the middle of the viewport
+  useEffect(() => {
+    const sectionIds = navItems.map((item) => item.href.replace("#", ""));
+
+    const observers = sectionIds.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActive(id);
+        },
+        {
+          rootMargin: "-40% 0px -55% 0px", // triggers when section is roughly centered
+          threshold: 0,
         }
-      }
-    };
+      );
+      observer.observe(el);
+      return observer;
+    });
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => observers.forEach((obs) => obs?.disconnect());
   }, []);
 
   return (
@@ -46,7 +57,7 @@ export const Navbar = () => {
     >
       <div className="container flex items-center justify-between">
         {/* Logo */}
-        <a className="text-xl font-bold text-primary flex items-center" href="#hero">
+        <a className="text-xl font-bold flex items-center" href="#hero">
           <span className="text-glow text-foreground">Brian Chang</span>
         </a>
 
@@ -83,7 +94,7 @@ export const Navbar = () => {
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Mobile menu overlay */}
+        {/* Mobile overlay */}
         <div
           className={cn(
             "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
@@ -96,7 +107,12 @@ export const Navbar = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                className={cn(
+                  "transition-colors duration-300",
+                  activeSection === item.href.replace("#", "")
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-primary"
+                )}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}

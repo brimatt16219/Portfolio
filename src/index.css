@@ -161,3 +161,23 @@
   padding: 0;
   text-align: center;
 }
+
+/* Scroll reveal base state — invisible and offset */
+@utility reveal-hidden {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Visible state — triggered by JS */
+@utility reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay variants */
+@utility reveal-delay-1 { transition-delay: 0.1s; }
+@utility reveal-delay-2 { transition-delay: 0.2s; }
+@utility reveal-delay-3 { transition-delay: 0.3s; }
+@utility reveal-delay-4 { transition-delay: 0.4s; }
+@utility reveal-delay-5 { transition-delay: 0.5s; }
