@@ -39,9 +39,9 @@ const projects = [
     description:
       "Interactive browser-based gardening game where you can grow and sell flowers. Built as a fun side project to explore game loop mechanics in React.",
     tags: ["React", "TypeScript", "Vite", "TailwindCSS"],
-    demoUrl: "",
+    demoUrl: "https://chrysanthemum-pink.vercel.app/",
     githubUrl: "https://github.com/brimatt16219/Chrysanthemum",
-    featured: false,
+    featured: true,
   },
   {
     id: 5,
