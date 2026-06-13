@@ -2,15 +2,26 @@ import { MapPin } from "lucide-react";
 
 const jobs = [
   {
+    id: 0,
+    title: "API Integrations Analyst",
+    company: "Fiserv",
+    description:
+      "Supporting enterprise merchant onboarding and payment gateway integrations on Fiserv's CommerceHub platform. Work spans card network processing across Visa, Mastercard, Amex, and Discover, Level II/III data enrichment to optimize interchange qualification, AVS/CVV fraud controls, REST API troubleshooting, and PCI DSS compliance within a high-volume acquiring environment.",
+    dates: "May 2026 – Present",
+    tags: ["CommerceHub", "REST APIs", "PCI DSS", "Level II/III", "Card Networks", "Cloud BIN", "Postman", "Payments"],
+    location: "Coral Springs, FL",
+    current: true,
+  },
+  {
     id: 1,
     title: "Software Engineer",
     company: "DAC Bond",
     description:
       "Maintained and enhanced large-scale Angular web applications with added mobile responsiveness, while designing RESTful APIs using .NET and Entity Framework. Integrated Adobe PDF Extract API with Python to automate document parsing, and implemented secure file uploads to AWS S3 using credentials stored in Oracle and SQL databases.",
-    dates: "May 2024 – Present",
+    dates: "May 2024 – May 2026",
     tags: ["Angular", ".NET Core", "TypeScript", "C#", "Python", "AWS", "SQL", "Oracle"],
     location: "Orlando, FL",
-    current: true,
+    current: false,
   },
   {
     id: 2,
@@ -32,17 +43,6 @@ const jobs = [
     dates: "May 2023 – Aug 2023",
     tags: ["Unity", "C#", ".NET", "WPF", "Visual Studio"],
     location: "Fall River, MA",
-    current: false,
-  },
-  {
-    id: 4,
-    title: "Software Engineer Intern",
-    company: "Evercore Technology Partners",
-    description:
-      "Developed responsive full-stack web applications for clients using Laravel and Blade, enhancing user experience through UI features built with HTML, CSS, and jQuery. Actively contributed to GitHub workspaces by participating in pull requests and resolving issues.",
-    dates: "Nov 2022 – May 2023",
-    tags: ["Laravel", "PHP", "Blade", "HTML", "CSS", "jQuery"],
-    location: "Remote",
     current: false,
   },
 ];

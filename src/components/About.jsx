@@ -26,6 +26,13 @@ export const About = () => {
               <div className="flex items-center gap-3 bg-card/60 rounded-lg px-4 py-3 border border-border">
                 <GraduationCap size={18} className="text-primary flex-shrink-0" />
                 <div>
+                  <p className="text-sm font-medium">Florida Atlantic University</p>
+                  <p className="text-xs text-muted-foreground">M.S. Computer Science (in progress)</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 bg-card/60 rounded-lg px-4 py-3 border border-border">
+                <GraduationCap size={18} className="text-primary flex-shrink-0" />
+                <div>
                   <p className="text-sm font-medium">University of Central Florida</p>
                   <p className="text-xs text-muted-foreground">B.S. Computer Science, 2025</p>
                 </div>
@@ -33,8 +40,8 @@ export const About = () => {
               <div className="flex items-center gap-3 bg-card/60 rounded-lg px-4 py-3 border border-border">
                 <Code size={18} className="text-primary flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-medium">Software Engineer</p>
-                  <p className="text-xs text-muted-foreground">DAC Bond · Full-time</p>
+                  <p className="text-sm font-medium">API Integrations Analyst</p>
+                  <p className="text-xs text-muted-foreground">Fiserv · Full-time</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 bg-card/60 rounded-lg px-4 py-3 border border-border">
@@ -52,19 +59,20 @@ export const About = () => {
             <div>
               <h3 className="text-2xl font-semibold mb-3">Hey, I'm Brian</h3>
               <p className="text-muted-foreground leading-relaxed">
-                I'm a software engineer with a passion for building things that are fast,
-                clean, and actually useful. I graduated from UCF with a degree in Computer
-                Science and have been working full-stack professionally since 2022.
+                I'm a software engineer and fintech professional with a passion for building
+                things that are fast, clean, and actually useful. I graduated from UCF with a
+                B.S. in Computer Science in 2025 and am currently pursuing my M.S. in CS at
+                Florida Atlantic University. I've been working full-stack professionally since 2022.
               </p>
             </div>
 
             <div>
               <h4 className="text-lg font-semibold mb-2">What I work with</h4>
               <p className="text-muted-foreground leading-relaxed">
-                My day-to-day at DAC Bond revolves around Angular, TypeScript, .NET, and AWS.
-                Outside of work I lean into React, Node, and whatever else the project calls for.
-                I've shipped production code across the full stack — from Oracle databases to
-                Three.js canvases.
+                At Fiserv I work on payment integrations and API solutions within the
+                CommerceHub ecosystem. Previously I built full-stack Angular/.NET applications
+                at DAC Bond. Outside of work I lean into React, Node, and whatever else the
+                project calls for.
               </p>
             </div>
 

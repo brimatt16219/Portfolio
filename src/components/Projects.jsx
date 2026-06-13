@@ -21,7 +21,7 @@ const projects = [
     tags: ["React", "TypeScript", "Vite", "TailwindCSS", "Node.js", "Express.js"],
     demoUrl: "https://devtrack-omega-three.vercel.app",
     githubUrl: "https://github.com/brimatt16219/devtrack",
-    featured: true,
+    featured: false,
   },
   {
     id: 3,

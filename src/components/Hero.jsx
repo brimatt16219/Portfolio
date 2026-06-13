@@ -13,7 +13,7 @@ export const Hero = () => {
           <div className="flex-1 text-left space-y-6 opacity-0 animate-fade-in-delay-2">
             <div>
               <p className="text-primary font-mono text-sm tracking-widest uppercase mb-2">
-                Software Engineer
+                Analyst @ Fiserv · MS CS @ FAU
               </p>
               <h1 className="text-5xl md:text-7xl font-bold leading-tight">
                 <span className="text-glow">Brian</span>
