@@ -1,0 +1,85 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+const lab = (await getCollection("lab")).sort((a, b) => +b.data.date - +a.data.date);
+const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+---
+
+<Base title="Lab" description="Small, dated experiments by Brian Chang: interactive prototypes and notes, each one built to understand something.">
+  <section class="wrap head">
+    <p class="label">Lab</p>
+    <h1 class="display">Small things, built<br />to understand something.</h1>
+    <p class="intro measure">Prototypes and notes, dated, newest first. Some become features. Most stay here.</p>
+  </section>
+  <section class="wrap">
+    <ol class="list">
+      {
+        lab.map((l, i) => (
+          <li class="rise" style={`--i:${i}`}>
+            <time class="mono" datetime={l.data.date.toISOString()}>{fmt(l.data.date)}</time>
+            <span class="kind mono">{l.data.kind}</span>
+            <span class="main">
+              <a href={`/lab/${l.id}`} style={`view-transition-name: lab-${l.id}`}>{l.data.title}</a>
+              <span class="sum">{l.data.summary}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(2.5rem, 8vh, 5rem) 3rem;
+  }
+  .head h1 {
+    margin-top: 1.25rem;
+    font-size: clamp(2.2rem, 1.3rem + 3.6vw, 4rem);
+  }
+  .intro {
+    margin-top: 1.5rem;
+    color: var(--muted);
+  }
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 8rem 6.5rem 1fr;
+    gap: 1.25rem;
+    align-items: baseline;
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+  li:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  time,
+  .kind {
+    color: var(--faint);
+  }
+  .main {
+    display: grid;
+    gap: 0.2rem;
+  }
+  .main a {
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    width: fit-content;
+  }
+  .sum {
+    color: var(--muted);
+  }
+  @media (max-width: 48rem) {
+    li {
+      grid-template-columns: 1fr 1fr;
+    }
+    .main {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

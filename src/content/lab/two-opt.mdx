@@ -1,0 +1,15 @@
+---
+title: 2-opt, one swap at a time
+date: 2026-11-24
+kind: Prototype
+summary: The route heuristic behind Voyager, slowed down so you can watch every crossing get removed.
+---
+import TwoOpt from "../../components/lab/TwoOpt.astro";
+
+<TwoOpt />
+
+Voyager orders stops with **2-opt**. Start from any tour. If two of its edges cross, reversing the stretch between them removes the crossing and shortens the tour. Keep doing that until no reversal helps. What's left has no crossings and is usually within a few percent of the best possible route, found in a fraction of the time an exact solver would need.
+
+Each red pair above is a swap being tried. Hit **Shuffle** for new stops, or **Step** to go one improvement at a time. With reduced motion on, **Run** jumps straight to the finished tour.
+
+This is the case for a heuristic: it can get stuck in a local minimum, where no single reversal helps even though a better tour exists. For errand-sized routes it gives a near-best answer instantly, and that's the tradeoff I chose in [Voyager](/work/voyager).

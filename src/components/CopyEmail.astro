@@ -1,0 +1,78 @@
+---
+import { site } from "../data/site";
+interface Props { label?: string; class?: string }
+const { label = site.email, class: cls = "" } = Astro.props;
+---
+
+<span class:list={["copy-email", cls]} data-copy-email>
+  <a href={`mailto:${site.email}`}>{label}</a>
+  <button type="button" data-copy aria-label="Copy email address">
+    <span data-idle>Copy</span>
+    <span data-done hidden>Copied</span>
+  </button>
+  <span class="sr-only" aria-live="polite" data-status></span>
+</span>
+
+<style>
+  .copy-email {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  button {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    min-height: 1.75rem;
+    padding: 0 0.55rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  button:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  button.is-done {
+    color: var(--paper);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  [data-done]:not([hidden]) {
+    display: inline-block;
+    animation: pop 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
+  @keyframes pop {
+    from { transform: scale(0.7); }
+  }
+</style>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-copy-email]")) {
+    const btn = root.querySelector<HTMLButtonElement>("[data-copy]")!;
+    const email = root.querySelector("a")!.getAttribute("href")!.replace("mailto:", "");
+    let t: number | undefined;
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch {
+        return; // Clipboard blocked: the mailto link still works.
+      }
+      btn.classList.add("is-done");
+      btn.querySelector("[data-idle]")!.toggleAttribute("hidden", true);
+      btn.querySelector("[data-done]")!.toggleAttribute("hidden", false);
+      root.querySelector("[data-status]")!.textContent = "Email address copied";
+      clearTimeout(t);
+      t = window.setTimeout(() => {
+        btn.classList.remove("is-done");
+        btn.querySelector("[data-idle]")!.toggleAttribute("hidden", false);
+        btn.querySelector("[data-done]")!.toggleAttribute("hidden", true);
+        root.querySelector("[data-status]")!.textContent = "";
+      }, 1800);
+    });
+  }
+</script>

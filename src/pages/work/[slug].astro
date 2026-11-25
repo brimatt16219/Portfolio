@@ -1,0 +1,136 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { site } from "../../data/site";
+
+export async function getStaticPaths() {
+  const all = (await getCollection("work"))
+    .filter((w) => w.data.caseStudy)
+    .sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: all[(i + 1) % all.length] },
+  }));
+}
+interface Props { entry: CollectionEntry<"work">; next: CollectionEntry<"work"> }
+const { entry, next } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: d.title,
+  description: d.outcome,
+  dateCreated: String(d.year),
+  author: { "@type": "Person", name: site.name },
+  ...(d.links.live && { url: d.links.live }),
+  ...(d.links.code && { codeRepository: d.links.code }),
+  keywords: d.stack.join(", "),
+};
+---
+
+<Base title={d.title} description={d.outcome} jsonLd={jsonLd}>
+  <article class="wrap">
+    <header class="head">
+      <p class="label"><a href="/work">Work</a> / {d.year}</p>
+      <h1 class="display" style={`view-transition-name: work-${entry.id}`}>{d.title}</h1>
+      <p class="outcome">{d.outcome}</p>
+      <dl class="meta">
+        <div><dt class="label">Role</dt><dd>{d.role}</dd></div>
+        <div><dt class="label">Team</dt><dd>{d.team}</dd></div>
+        <div><dt class="label">When</dt><dd>{d.timeline}</dd></div>
+        <div class="wide"><dt class="label">Stack</dt><dd>{d.stack.join(", ")}</dd></div>
+      </dl>
+      <p class="links">
+        {d.links.live && <a href={d.links.live} class="btn">Live ↗</a>}
+        {d.links.code && <a href={d.links.code} class="btn ghost">Code ↗</a>}
+      </p>
+    </header>
+
+    <div class="prose body">
+      <Content />
+    </div>
+
+    <nav class="next" aria-label="Next case study">
+      <span class="label">Next</span>
+      <a href={`/work/${next.id}`}>{next.data.title} →</a>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(2.5rem, 8vh, 5rem) 2.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .head .label a {
+    color: inherit;
+  }
+  .head h1 {
+    margin-top: 1rem;
+    width: fit-content;
+  }
+  .outcome {
+    margin-top: 1.5rem;
+    max-width: 34rem;
+    font-size: 1.25rem;
+    color: var(--muted);
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(3, auto) 1fr;
+    gap: 1rem 3rem;
+    margin-top: 2.5rem;
+  }
+  .meta dd {
+    margin: 0.3rem 0 0;
+  }
+  .links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0 1.1rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+  }
+  .btn:hover {
+    background: var(--accent);
+    color: var(--paper);
+    border-color: var(--accent);
+  }
+  .body {
+    margin-top: 1rem;
+  }
+  .next {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 1.375rem;
+    letter-spacing: -0.02em;
+  }
+  @media (max-width: 48rem) {
+    .meta {
+      grid-template-columns: 1fr 1fr;
+    }
+    .meta .wide {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

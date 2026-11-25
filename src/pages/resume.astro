@@ -1,0 +1,159 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import CopyEmail from "../components/CopyEmail.astro";
+import { site, experience, education, skills } from "../data/site";
+const work = (await getCollection("work")).filter((w) => w.data.featured).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Resume" description="Brian Chang's resume: experience, projects, education and skills. HTML here, PDF one click away.">
+  <article class="wrap resume">
+    <header class="top">
+      <div>
+        <h1 class="h2">{site.name}</h1>
+        <p class="muted">{site.role} · {site.location}</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href={site.resumePdf}>Download PDF</a>
+        <button class="btn ghost" type="button" data-print>Print</button>
+      </div>
+    </header>
+    <p class="contact"><CopyEmail /> · <a href={site.links.github}>GitHub</a> · <a href={site.links.linkedin}>LinkedIn</a></p>
+
+    <section>
+      <h2 class="label">Experience</h2>
+      {experience.map((j) => (
+        <div class="item">
+          <div class="line"><strong>{j.title}, {j.company}</strong><span class="mono">{j.start} – {j.end}</span></div>
+          <p>{j.summary}</p>
+        </div>
+      ))}
+    </section>
+
+    <section>
+      <h2 class="label">Projects</h2>
+      {work.map((w) => (
+        <div class="item">
+          <div class="line"><strong><a href={`/work/${w.id}`}>{w.data.title}</a></strong><span class="mono">{w.data.stack.slice(0, 4).join(" · ")}</span></div>
+          <p>{w.data.outcome}</p>
+        </div>
+      ))}
+    </section>
+
+    <section>
+      <h2 class="label">Education</h2>
+      {education.map((e) => (
+        <div class="item line"><strong>{e.degree}, {e.school}</strong><span class="mono">{e.when}</span></div>
+      ))}
+    </section>
+
+    <section>
+      <h2 class="label">Skills</h2>
+      <dl>{skills.map((s) => <div class="sk"><dt class="mono">{s.group}</dt><dd>{s.items.join(", ")}</dd></div>)}</dl>
+    </section>
+  </article>
+</Base>
+
+<script>
+  document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
+</script>
+
+<style>
+  .resume {
+    max-width: 48rem;
+    padding-top: clamp(2rem, 6vh, 4rem);
+  }
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem;
+  }
+  .muted {
+    color: var(--muted);
+  }
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0 1.1rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    text-decoration: none;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line-strong);
+  }
+  .contact {
+    margin-top: 1rem;
+    color: var(--muted);
+  }
+  section {
+    margin-top: 2.75rem;
+  }
+  section > .label {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .item {
+    margin-top: 1.1rem;
+  }
+  .line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+  }
+  .line strong {
+    font-weight: 560;
+  }
+  .line .mono {
+    color: var(--faint);
+  }
+  .item p {
+    margin-top: 0.3rem;
+    color: var(--muted);
+  }
+  .sk {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    margin-top: 0.6rem;
+  }
+  .sk dt {
+    color: var(--faint);
+  }
+  .sk dd {
+    margin: 0;
+  }
+  @media print {
+    :global(.site-header),
+    :global(.site-footer),
+    :global(.skip),
+    .actions,
+    .contact :global(button) {
+      display: none !important;
+    }
+    :global(html) {
+      background: #fff;
+      color: #000;
+      font-size: 11pt;
+    }
+    section {
+      margin-top: 1.25rem;
+      break-inside: avoid;
+    }
+  }
+</style>

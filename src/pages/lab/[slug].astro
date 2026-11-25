@@ -1,0 +1,49 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+export async function getStaticPaths() {
+  return (await getCollection("lab")).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+interface Props { entry: CollectionEntry<"lab"> }
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const date = d.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+---
+
+<Base title={d.title} description={d.summary}>
+  <article class="wrap">
+    <header class="head">
+      <p class="label"><a href="/lab">Lab</a> / {d.kind} / <time datetime={d.date.toISOString()}>{date}</time></p>
+      <h1 class="h1" style={`view-transition-name: lab-${entry.id}`}>{d.title}</h1>
+      <p class="sum">{d.summary}</p>
+    </header>
+    <div class="prose"><Content /></div>
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(2.5rem, 8vh, 5rem) 2rem;
+    max-width: 40rem;
+  }
+  .head .label a {
+    color: inherit;
+  }
+  .h1 {
+    margin-top: 1rem;
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-weight: 460;
+    width: fit-content;
+  }
+  .sum {
+    margin-top: 1rem;
+    font-size: 1.1875rem;
+    color: var(--muted);
+  }
+  .prose :global(figure) {
+    max-width: none;
+  }
+</style>

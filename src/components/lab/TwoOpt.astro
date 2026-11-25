@@ -1,0 +1,226 @@
+---
+// 2-opt visualizer. Vanilla TS, no framework: ~3 KB of script, only on this page.
+---
+
+<figure class="two-opt not-prose" data-two-opt>
+  <svg viewBox="0 0 600 360" role="img" aria-labelledby="two-opt-cap">
+    <g data-edges></g>
+    <g data-try></g>
+    <g data-points></g>
+  </svg>
+  <figcaption id="two-opt-cap" class="two-opt__bar">
+    <span class="mono" aria-live="polite">
+      <span data-len>—</span> · <span data-swaps>0</span> swaps
+    </span>
+    <span class="two-opt__btns">
+      <button type="button" data-act="shuffle">Shuffle</button>
+      <button type="button" data-act="step">Step</button>
+      <button type="button" data-act="run" class="is-primary">Run</button>
+    </span>
+  </figcaption>
+</figure>
+
+<style>
+  .two-opt {
+    margin: 0 0 2.5rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .two-opt__bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .two-opt__btns {
+    display: flex;
+    gap: 0.5rem;
+  }
+  button {
+    min-height: 2rem;
+    padding: 0 0.85rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    font: inherit;
+    color: var(--ink);
+    background: transparent;
+    cursor: pointer;
+  }
+  button:hover {
+    border-color: var(--ink);
+  }
+  button.is-primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  button:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  :global([data-two-opt] .edge) {
+    stroke: var(--ink);
+    stroke-width: 1.5;
+    fill: none;
+  }
+  :global([data-two-opt] .try) {
+    stroke: var(--accent);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  :global([data-two-opt] .pt) {
+    fill: var(--paper);
+    stroke: var(--ink);
+    stroke-width: 1.5;
+  }
+  :global([data-two-opt] .pt.start) {
+    fill: var(--accent);
+    stroke: var(--accent);
+  }
+</style>
+
+<script>
+  type P = { x: number; y: number };
+  const NS = "http://www.w3.org/2000/svg";
+  const N = 18;
+
+  for (const root of document.querySelectorAll<HTMLElement>("[data-two-opt]")) {
+    const $ = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+    const edgesG = $("[data-edges]");
+    const tryG = $("[data-try]");
+    const ptsG = $("[data-points]");
+    const lenEl = $("[data-len]");
+    const swapsEl = $("[data-swaps]");
+    const btns = root.querySelectorAll<HTMLButtonElement>("button");
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+
+    let pts: P[] = [];
+    let tour: number[] = [];
+    let swaps = 0;
+    let running = false;
+    let gen = 0; // bumps on shuffle so an in-flight step can't touch a new tour
+
+    const d = (a: P, b: P) => Math.hypot(a.x - b.x, a.y - b.y);
+    const length = () => tour.reduce((s, _, i) => s + d(pts[tour[i]], pts[tour[(i + 1) % tour.length]]), 0);
+
+    function shuffle() {
+      pts = Array.from({ length: N }, () => ({ x: 30 + Math.random() * 540, y: 30 + Math.random() * 300 }));
+      tour = pts.map((_, i) => i).sort(() => Math.random() - 0.5);
+      swaps = 0;
+      gen++;
+      tryG.replaceChildren();
+      draw();
+    }
+
+    function line(a: P, b: P, cls: string) {
+      const l = document.createElementNS(NS, "line");
+      l.setAttribute("x1", String(a.x));
+      l.setAttribute("y1", String(a.y));
+      l.setAttribute("x2", String(b.x));
+      l.setAttribute("y2", String(b.y));
+      l.setAttribute("class", cls);
+      return l;
+    }
+
+    function draw() {
+      edgesG.replaceChildren(
+        ...tour.map((p, i) => line(pts[p], pts[tour[(i + 1) % tour.length]], "edge")),
+      );
+      ptsG.replaceChildren(
+        ...tour.map((p, i) => {
+          const c = document.createElementNS(NS, "circle");
+          c.setAttribute("cx", String(pts[p].x));
+          c.setAttribute("cy", String(pts[p].y));
+          c.setAttribute("r", i === 0 ? "6" : "4.5");
+          c.setAttribute("class", i === 0 ? "pt start" : "pt");
+          return c;
+        }),
+      );
+      lenEl.textContent = `${Math.round(length())} px`;
+      swapsEl.textContent = String(swaps);
+    }
+
+    // Find the first improving reversal; return its edge indices or null.
+    function findSwap(): [number, number] | null {
+      const n = tour.length;
+      for (let i = 0; i < n - 1; i++) {
+        for (let j = i + 2; j < n; j++) {
+          if (i === 0 && j === n - 1) continue;
+          const a = pts[tour[i]], b = pts[tour[i + 1]];
+          const c = pts[tour[j]], e = pts[tour[(j + 1) % n]];
+          if (d(a, c) + d(b, e) < d(a, b) + d(c, e) - 1e-9) return [i, j];
+        }
+      }
+      return null;
+    }
+
+    function apply([i, j]: [number, number]) {
+      tour = [...tour.slice(0, i + 1), ...tour.slice(i + 1, j + 1).reverse(), ...tour.slice(j + 1)];
+      swaps++;
+    }
+
+    function showTry([i, j]: [number, number]) {
+      const n = tour.length;
+      tryG.replaceChildren(
+        line(pts[tour[i]], pts[tour[i + 1]], "try"),
+        line(pts[tour[j]], pts[tour[(j + 1) % n]], "try"),
+      );
+    }
+
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    const setBusy = (b: boolean) => {
+      running = b;
+      btns.forEach((x) => x.dataset.act !== "shuffle" && (x.disabled = b));
+    };
+
+    async function step() {
+      const s = findSwap();
+      if (!s) return false;
+      const g = gen;
+      if (!reduced.matches) {
+        showTry(s);
+        await wait(260);
+        if (g !== gen) return false;
+      }
+      apply(s);
+      tryG.replaceChildren();
+      draw();
+      return true;
+    }
+
+    async function run() {
+      setBusy(true);
+      if (reduced.matches) {
+        let s;
+        while ((s = findSwap())) apply(s);
+        draw();
+      } else {
+        while (running && (await step())) await wait(90);
+      }
+      setBusy(false);
+    }
+
+    root.addEventListener("click", (e) => {
+      const act = (e.target as HTMLElement).closest("button")?.dataset.act;
+      if (act === "shuffle") {
+        running = false;
+        setBusy(false);
+        shuffle();
+      } else if (act === "step" && !running) step();
+      else if (act === "run" && !running) run();
+    });
+
+    shuffle();
+  }
+</script>

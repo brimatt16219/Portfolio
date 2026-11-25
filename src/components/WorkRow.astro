@@ -1,0 +1,85 @@
+---
+import type { CollectionEntry } from "astro:content";
+interface Props { entry: CollectionEntry<"work">; index?: number }
+const { entry, index = 0 } = Astro.props;
+const d = entry.data;
+const href = d.caseStudy ? `/work/${entry.id}` : (d.links.live ?? d.links.code);
+const external = !d.caseStudy;
+---
+
+<li class="row rise" style={`--i:${index}`}>
+  <a href={href} class="row__link" {...(external ? { rel: "noopener" } : {})}>
+    <span class="row__year mono">{d.year}</span>
+    <span class="row__main">
+      <span class="row__title" style={d.caseStudy ? `view-transition-name: work-${entry.id}` : undefined}>
+        {d.title}{external && <span class="ext" aria-label="(external link)"> ↗</span>}
+      </span>
+      <span class="row__outcome">{d.outcome}</span>
+    </span>
+    <span class="row__stack mono">{d.stack.slice(0, 3).join(" · ")}</span>
+    <span class="row__arrow" aria-hidden="true">→</span>
+  </a>
+</li>
+
+<style>
+  .row {
+    border-top: 1px solid var(--line);
+  }
+  .row:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .row__link {
+    display: grid;
+    grid-template-columns: 4rem 1fr 14rem 1.5rem;
+    gap: 1.25rem;
+    align-items: baseline;
+    padding-block: 1.35rem;
+    text-decoration: none;
+    transition: padding 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .row__year,
+  .row__stack {
+    color: var(--faint);
+  }
+  .row__main {
+    display: grid;
+    gap: 0.2rem;
+  }
+  .row__title {
+    font-size: 1.375rem;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    width: fit-content;
+  }
+  .row__outcome {
+    color: var(--muted);
+    max-width: 44ch;
+  }
+  .ext {
+    color: var(--faint);
+    font-size: 0.85em;
+  }
+  .row__arrow {
+    color: var(--faint);
+    transition: transform 0.25s, color 0.25s;
+  }
+  .row__link:hover {
+    padding-left: 0.5rem;
+  }
+  .row__link:hover .row__arrow {
+    color: var(--accent);
+    transform: translateX(0.2rem);
+  }
+  .row__link:hover .row__title {
+    color: var(--accent-ink);
+  }
+  @media (max-width: 48rem) {
+    .row__link {
+      grid-template-columns: 3.25rem 1fr;
+    }
+    .row__stack,
+    .row__arrow {
+      display: none;
+    }
+  }
+</style>

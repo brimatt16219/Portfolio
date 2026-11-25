@@ -1,0 +1,178 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import photo from "../assets/brian.jpg";
+import { site, experience, education, skills } from "../data/site";
+---
+
+<Base title="About" description="About Brian Chang: software engineer in Boca Raton, FL. Payments at Fiserv, full-stack at DAC Bond, simulation at L3Harris.">
+  <section class="wrap head">
+    <div>
+      <p class="label">About</p>
+      <h1 class="display">Hey, I'm Brian.</h1>
+      <div class="bio measure">
+        <p>
+          I'm a software engineer in Boca Raton. I've been building software professionally since 2023: simulation tools at L3Harris, then two years of Angular and .NET apps at DAC Bond. Now I'm at Fiserv on the payments side, where the APIs I support are the ones merchants depend on to get paid.
+        </p>
+        <p>
+          That mix taught me to care about two things at once: interfaces that feel quick and obvious, and the unglamorous parts behind them, like validation, compliance and what happens when a request fails. I graduated from UCF with a B.S. in Computer Science in 2025 and I'm working on an M.S. at Florida Atlantic University.
+        </p>
+        <p>
+          Away from the keyboard I'm usually working out, exploring South Florida, or deep in whatever I'm learning next.
+        </p>
+      </div>
+    </div>
+    <Image src={photo} alt="Brian Chang" width={640} widths={[320, 640]} sizes="(max-width: 48rem) 60vw, 20rem" class="photo" loading="eager" />
+  </section>
+
+  <section class="wrap block" aria-labelledby="exp">
+    <h2 id="exp" class="label">Experience</h2>
+    <ol class="exp">
+      {
+        experience.map((j) => (
+          <li>
+            <p class="when mono">{j.start} – {j.end}</p>
+            <div>
+              <h3><span>{j.title}</span> · {j.company}</h3>
+              <p class="where">{j.location}</p>
+              <p class="sum">{j.summary}</p>
+              <p class="stack mono">{j.stack.join(" · ")}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="wrap block two" aria-label="Education and skills">
+    <div>
+      <h2 class="label">Education</h2>
+      <ul class="edu">
+        {education.map((e) => <li><strong>{e.degree}</strong><span>{e.school} · {e.when}</span></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="label">Tools I reach for</h2>
+      <dl class="skills">
+        {skills.map((s) => (<div><dt class="mono">{s.group}</dt><dd>{s.items.join(", ")}</dd></div>))}
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 1fr 20rem;
+    gap: 3rem;
+    align-items: end;
+    padding-block: clamp(2.5rem, 8vh, 5rem) 1rem;
+  }
+  .head h1 {
+    margin-top: 1.25rem;
+  }
+  .bio {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1rem;
+    font-size: 1.125rem;
+  }
+  .head :global(.photo) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
+    filter: grayscale(0.15) contrast(1.02);
+  }
+  .block {
+    margin-top: 6rem;
+  }
+  .exp {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+  }
+  .exp li {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 1.25rem;
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--line);
+  }
+  .when {
+    color: var(--faint);
+    padding-top: 0.3rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 450;
+    letter-spacing: -0.015em;
+  }
+  h3 span {
+    font-weight: 560;
+  }
+  .where {
+    color: var(--faint);
+    font-size: 0.9375rem;
+  }
+  .sum {
+    margin-top: 0.75rem;
+    max-width: 44rem;
+    color: var(--muted);
+  }
+  .stack {
+    margin-top: 0.75rem;
+    color: var(--faint);
+  }
+  .two {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 3rem;
+  }
+  .edu {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .edu li {
+    display: grid;
+  }
+  .edu strong {
+    font-weight: 560;
+  }
+  .edu span {
+    color: var(--muted);
+  }
+  .skills {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .skills div {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  .skills dt {
+    color: var(--faint);
+  }
+  .skills dd {
+    margin: 0;
+  }
+  @media (max-width: 48rem) {
+    .head,
+    .two,
+    .exp li {
+      grid-template-columns: 1fr;
+    }
+    .head :global(.photo) {
+      max-width: 15rem;
+      order: -1;
+    }
+  }
+</style>

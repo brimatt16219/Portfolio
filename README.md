@@ -1,34 +1,33 @@
-# My Portfolio
+# brian chang — portfolio v2
 
-Welcome to my personal developer portfolio!
-Enjoy the star shower :)
+Static Astro site. Editorial layout, light/dark themes, almost no JavaScript.
 
-🔗 **Live Demo:** [https://portfolio-iota-teal-82.vercel.app/](https://portfolio-iota-teal-82.vercel.app/)
+## Run
 
----
+Needs Node ≥ 22.23 (see `.nvmrc`).
 
-## Tech Stack
+```sh
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # → dist/
+```
 
-- **React** — Component-based UI framework
-- **Vite** — Super fast dev server and build tool
-- **Tailwind CSS** — Utility-first CSS for rapid styling
-- **Three.js** + `@react-three/fiber` — WebGL-powered 3D graphics
-- **@react-three/drei** — Helpers for simplified Three.js setup
+## Where things live
 
+| What | Where |
+|---|---|
+| Name, headline, experience, skills, links | `src/data/site.ts` |
+| Case studies | `src/content/work/*.md` (schema in `src/content.config.ts`) |
+| Lab entries | `src/content/lab/*.mdx` |
+| Colors, type, motion | `src/styles/global.css` |
+| Pages | `src/pages/` |
 
-This project is deployed via [Vercel](https://vercel.com/). 
+Add a project: drop a Markdown file in `src/content/work/`. Set `caseStudy: false` to show it as a row only, with no page.
+Add a lab entry: drop an `.mdx` file in `src/content/lab/` with a `date`, a `kind` and a `summary`.
 
----
+Case-study drafts contain `<!-- ... -->` notes marking what still needs real details and numbers.
 
-## Connect With Me
+## Deploy
 
-- [LinkedIn](https://www.linkedin.com/in/ch4ng)
-- [GitHub](https://github.com/brimatt16219)
-- brimatt062495@gmail.com
-
----
-
-## Credits
-
-Made by **Brian Chang**  
-© 2025 — All rights reserved.
+Static output: works on Cloudflare Pages/Workers, Vercel or Netlify with build command `npm run build` and output directory `dist`.
+Update `site` in `astro.config.mjs` if the domain changes.

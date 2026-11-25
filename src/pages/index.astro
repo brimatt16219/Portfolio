@@ -1,0 +1,202 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import WorkRow from "../components/WorkRow.astro";
+import CopyEmail from "../components/CopyEmail.astro";
+import { site, experience } from "../data/site";
+
+const work = (await getCollection("work"))
+  .filter((w) => w.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+const lab = (await getCollection("lab")).sort((a, b) => +b.data.date - +a.data.date).slice(0, 3);
+const now = experience[0];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  jobTitle: site.role,
+  url: Astro.site?.toString(),
+  email: `mailto:${site.email}`,
+  address: { "@type": "PostalAddress", addressLocality: "Boca Raton", addressRegion: "FL", addressCountry: "US" },
+  worksFor: { "@type": "Organization", name: now.company },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "University of Central Florida" },
+    { "@type": "CollegeOrUniversity", name: "Florida Atlantic University" },
+  ],
+  sameAs: [site.links.github, site.links.linkedin],
+};
+---
+
+<Base jsonLd={jsonLd}>
+  <section class="wrap hero">
+    <p class="label rise">{site.name} · {site.role} · {site.location}</p>
+    <h1 class="display">
+      I build software<br />that <em>moves money</em><br />and maps routes.
+    </h1>
+    <p class="lede rise" style="--i:2">{site.headline}</p>
+    <p class="avail rise" style="--i:3">
+      <span class="pulse" aria-hidden="true"></span>{site.availability}
+    </p>
+    <div class="ctas rise" style="--i:4">
+      <CopyEmail />
+      <a href="/resume" class="btn">Resume</a>
+    </div>
+  </section>
+
+  <section class="wrap block" aria-labelledby="sel">
+    <div class="block__head">
+      <h2 id="sel" class="label">Selected work</h2>
+      <a href="/work" class="more">All work →</a>
+    </div>
+    <ul class="rows">
+      {work.map((w, i) => <WorkRow entry={w} index={i} />)}
+    </ul>
+  </section>
+
+  <section class="wrap block split" aria-labelledby="now">
+    <h2 id="now" class="label">Currently</h2>
+    <div>
+      <p class="now">
+        <strong>{now.title}</strong> at {now.company}, working on payment-gateway integrations for enterprise merchants on CommerceHub. Before that, two years building Angular and .NET apps at DAC Bond. Studying for an M.S. in Computer Science at Florida Atlantic University.
+      </p>
+      <p class="more-line"><a href="/about">More about me and my experience →</a></p>
+    </div>
+  </section>
+
+  {
+    lab.length > 0 && (
+      <section class="wrap block split" aria-labelledby="lab">
+        <h2 id="lab" class="label">From the lab</h2>
+        <ul class="lab">
+          {lab.map((l) => (
+            <li>
+              <a href={`/lab/${l.id}`}>{l.data.title}</a>
+              <span class="mono">
+                {l.data.kind} · {l.data.date.toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(3rem, 10vh, 7rem) 4rem;
+  }
+  .hero h1 {
+    margin-top: 1.25rem;
+  }
+  .hero em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .lede {
+    margin-top: 2rem;
+    max-width: 36rem;
+    font-size: 1.1875rem;
+    color: var(--muted);
+  }
+  .avail {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+  }
+  .pulse {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #3f8f4f;
+    box-shadow: 0 0 0 0 rgb(63 143 79 / 0.5);
+    animation: ping 2.4s ease-out infinite;
+  }
+  @keyframes ping {
+    70% { box-shadow: 0 0 0 0.45rem rgb(63 143 79 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(63 143 79 / 0); }
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2.25rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0 1.1rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .btn:hover {
+    background: var(--accent);
+  }
+  .block {
+    margin-top: 5.5rem;
+  }
+  .block__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+  }
+  .more {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+  .rows {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .split {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 1.25rem;
+  }
+  .split > .label {
+    padding-top: 0.3rem;
+  }
+  .now {
+    max-width: 40rem;
+    font-size: 1.1875rem;
+  }
+  .now strong {
+    font-weight: 560;
+  }
+  .more-line {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+  }
+  .lab {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .lab li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    align-items: baseline;
+    font-size: 1.0625rem;
+  }
+  .lab .mono {
+    color: var(--faint);
+  }
+  @media (max-width: 48rem) {
+    .split {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

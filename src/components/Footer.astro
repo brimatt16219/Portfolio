@@ -1,0 +1,58 @@
+---
+import { site } from "../data/site";
+import CopyEmail from "./CopyEmail.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="wrap site-footer">
+  <div class="cta">
+    <p class="label">Get in touch</p>
+    <p class="h2">The fastest way to reach me is email.</p>
+    <CopyEmail class="mt" />
+  </div>
+  <div class="meta">
+    <ul>
+      <li><a href={site.links.github} rel="me">GitHub</a></li>
+      <li><a href={site.links.linkedin} rel="me">LinkedIn</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/colophon">Colophon</a></li>
+    </ul>
+    <p class="mono">© {year} {site.name} · {site.location}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 8rem;
+    padding-block: 3rem 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .cta .h2 {
+    margin-top: 0.6rem;
+    max-width: 22ch;
+  }
+  .cta :global(.mt) {
+    margin-top: 1.1rem;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul a {
+    display: inline-block;
+    padding-block: 0.2rem;
+  }
+</style>

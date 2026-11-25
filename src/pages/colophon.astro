@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+---
+
+<Base title="Colophon" description="How this site is built: stack, type, color, and what AI was and wasn't used for.">
+  <article class="wrap">
+    <header class="head">
+      <p class="label">Colophon</p>
+      <h1 class="display">How this site is made.</h1>
+    </header>
+    <div class="prose">
+      <h2>Stack</h2>
+      <p>Built with <a href="https://astro.build">Astro</a>, so pages ship as static HTML with almost no JavaScript. The few interactive pieces (the command menu, copy-email and the lab demos) are small vanilla TypeScript scripts loaded only where they're used. Styles are hand-written CSS on top of <a href="https://tailwindcss.com">Tailwind CSS</a> v4, with every token defined here rather than taken from a library palette.</p>
+      <h2>Motion</h2>
+      <p>Page changes use the browser's native cross-document View Transitions, with no router and no animation library. Project titles carry over from list to page where the browser supports it. Everything turns off when your system asks for reduced motion.</p>
+      <h2>Type &amp; color</h2>
+      <p>Set in <a href="https://fonts.google.com/specimen/Schibsted+Grotesk">Schibsted Grotesk</a>, with <a href="https://www.ibm.com/plex/">IBM Plex Mono</a> for dates and labels. Paper and ink, with one persimmon accent. Dark mode follows your system, and the toggle remembers your choice.</p>
+      <h2>Content</h2>
+      <p>Case studies and lab entries are Markdown files in typed content collections. The schema won't let a project ship without an outcome, a role, a timeline and a working link.</p>
+      <h2>AI</h2>
+      <p>I used AI as a pair programmer for scaffolding and research. The case studies, decisions and words are mine.</p>
+      <h2>Previous version</h2>
+      <p>v1 was a React and Three.js single-page app with a shooting-star background. <a href="https://github.com/brimatt16219/Portfolio/tree/e517377">Its code is still here.</a></p>
+      <h2>Source</h2>
+      <p><a href={site.repo}>The code for this site is on GitHub.</a></p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(2.5rem, 8vh, 5rem) 1rem;
+  }
+  .head h1 {
+    margin-top: 1.25rem;
+    font-size: clamp(2.2rem, 1.3rem + 3.6vw, 4rem);
+  }
+</style>
