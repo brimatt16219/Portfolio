@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://portfolio-brian-chang.vercel.app",
+  site: "https://brianchang.dev",
   integrations: [mdx(), sitemap()],
   vite: { plugins: [tailwindcss()] },
 });
