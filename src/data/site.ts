@@ -9,7 +9,7 @@ export const site = {
     "At Fiserv I build tools around CommerceHub, the payments platform enterprise merchants integrate with. On my own time I built l3lint, a linter for card payment data, and helped win a NASA Space Apps award mapping Earth's surface change.",
   location: "Boca Raton, FL",
   timezone: "ET (UTC−5)",
-  availability: "Open to full-time software engineering roles — remote or hybrid.",
+  availability: "Open to software engineering roles.",
   email: "brimatt062495@gmail.com",
   resumePdf: "/resume.pdf",
   links: {
