@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "redesign-dev",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "node@24", "D:/Projects/Portfolio/portfolio/.claude/worktrees/redesign/node_modules/astro/bin/astro.mjs", "dev", "--port", "4321", "--root", "D:/Projects/Portfolio/portfolio/.claude/worktrees/redesign"],
+      "port": 4321
+    }
+  ]
+}
