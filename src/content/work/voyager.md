@@ -9,7 +9,7 @@ links:
   live: https://voyager-rose-seven.vercel.app
   code: https://github.com/brimatt16219/Voyager
 featured: true
-order: 1
+order: 3
 ---
 
 <!-- DRAFT: everything below is written from the repo and stack. Check each claim, add real numbers (stops, route time, response time), and replace anything that isn't how you actually reasoned. -->

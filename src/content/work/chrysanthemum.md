@@ -8,8 +8,8 @@ stack: [React, TypeScript, Tailwind CSS, Vite]
 links:
   live: https://chrysanthemum-pink.vercel.app/
   code: https://github.com/brimatt16219/Chrysanthemum
-featured: true
-order: 3
+featured: false
+order: 4
 ---
 
 <!-- DRAFT: check against the repo. -->

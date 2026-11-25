@@ -17,15 +17,15 @@ npm run build    # → dist/
 | What | Where |
 |---|---|
 | Name, headline, experience, skills, links | `src/data/site.ts` |
-| Case studies | `src/content/work/*.md` (schema in `src/content.config.ts`) |
+| Projects | `src/content/work/*.md` (schema in `src/content.config.ts`) |
 | Lab entries | `src/content/lab/*.mdx` |
 | Colors, type, motion | `src/styles/global.css` |
 | Pages | `src/pages/` |
 
-Add a project: drop a Markdown file in `src/content/work/`. Set `caseStudy: false` to show it as a row only, with no page.
+Add a project: drop a Markdown file in `src/content/work/`. `featured: true` puts it on the home page; `order` sets its position.
 Add a lab entry: drop an `.mdx` file in `src/content/lab/` with a `date`, a `kind` and a `summary`.
 
-Case-study drafts contain `<!-- ... -->` notes marking what still needs real details and numbers.
+Project drafts contain `<!-- ... -->` notes marking what still needs real details and numbers.
 
 ## Deploy
 

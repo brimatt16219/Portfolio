@@ -45,6 +45,7 @@ const jsonLd = {
       <p class="links">
         {d.links.live && <a href={d.links.live} class="btn">Live ↗</a>}
         {d.links.code && <a href={d.links.code} class="btn ghost">Code ↗</a>}
+        {d.links.docs && <a href={d.links.docs} class="btn ghost">Docs ↗</a>}
       </p>
     </header>
 
@@ -52,7 +53,7 @@ const jsonLd = {
       <Content />
     </div>
 
-    <nav class="next" aria-label="Next case study">
+    <nav class="next" aria-label="Next project">
       <span class="label">Next</span>
       <a href={`/work/${next.id}`}>{next.data.title} →</a>
     </nav>

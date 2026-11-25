@@ -15,7 +15,7 @@ const work = defineCollection({
     timeline: z.string(),
     stack: z.array(z.string()).max(8),
     links: z
-      .object({ live: z.url().optional(), code: z.url().optional() })
+      .object({ live: z.url().optional(), code: z.url().optional(), docs: z.url().optional() })
       .refine((l) => l.live || l.code, "A project needs a live or code link."),
     featured: z.boolean().default(false),
     order: z.number().default(99),

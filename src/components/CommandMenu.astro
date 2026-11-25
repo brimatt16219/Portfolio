@@ -12,7 +12,7 @@ type Item = { label: string; group: string; href?: string; action?: string; hint
 const items: Item[] = [
   { group: "Go to", label: "Home", href: "/" },
   { group: "Go to", label: "Work", href: "/work" },
-  ...work.map((w) => ({ group: "Go to", label: w.data.title, href: `/work/${w.id}`, hint: "Case study" })),
+  ...work.map((w) => ({ group: "Go to", label: w.data.title, href: `/work/${w.id}`, hint: "Project" })),
   { group: "Go to", label: "Lab", href: "/lab" },
   { group: "Go to", label: "About", href: "/about" },
   { group: "Go to", label: "Resume", href: "/resume" },

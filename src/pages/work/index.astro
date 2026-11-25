@@ -4,25 +4,20 @@ import Base from "../../layouts/Base.astro";
 import WorkRow from "../../components/WorkRow.astro";
 import { site } from "../../data/site";
 
-const all = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
-const cases = all.filter((w) => w.data.caseStudy);
-const other = all.filter((w) => !w.data.caseStudy);
+const projects = (await getCollection("work"))
+  .filter((w) => w.data.caseStudy)
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Base title="Work" description="Case studies and smaller projects by Brian Chang: what each one does, the decisions behind it, and links to the live app and code.">
+<Base title="Work" description="Projects by Brian Chang: what each one does, the decisions behind it, and links to the live app and code.">
   <section class="wrap head">
     <p class="label">Work</p>
     <h1 class="display">Things I've built,<br />and why they're built that way.</h1>
   </section>
 
-  <section class="wrap" aria-labelledby="cs">
-    <h2 id="cs" class="label sub">Case studies</h2>
-    <ul class="rows">{cases.map((w, i) => <WorkRow entry={w} index={i} />)}</ul>
-  </section>
-
-  <section class="wrap" aria-labelledby="other">
-    <h2 id="other" class="label sub">Smaller projects</h2>
-    <ul class="rows">{other.map((w, i) => <WorkRow entry={w} index={i} />)}</ul>
+  <section class="wrap" aria-labelledby="projects">
+    <h2 id="projects" class="label sub">Projects</h2>
+    <ul class="rows">{projects.map((w, i) => <WorkRow entry={w} index={i} />)}</ul>
     <p class="gh">More on <a href={site.links.github}>GitHub</a>.</p>
   </section>
 </Base>
